@@ -1,0 +1,366 @@
+/* 공통 변수 */
+:root {
+  --bg: #141e30;
+  --surface: #1f2b44;
+  --text: #f5f5f7;
+  --accent: #4da3ff;
+  --warn: #ff5a5f;
+  --hover-shadow: #ffd70080;
+
+  --hero-text: #f5f5f7;
+  --detail-overlay: rgba(0, 0, 0, 0.75);
+
+  --font-title: "Black Han Sans", sans-serif;
+  --font-body: "Noto Sans KR", sans-serif;
+
+  --gap: 20px;
+}
+
+/* 기본 설정 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+  font-weight: 400;
+}
+
+a {
+  color: var(--accent);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* 헤더 */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+.top h1 {
+  font-size: 1.5rem;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* 히어로 */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 300px;
+  padding: 32px 16px;
+  color: var(--hero-text);
+  text-align: center;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.65)
+    ),
+    url("https://image.tmdb.org/t/p/w1280/1AzcUrslZJYlLd1jvLy6mswihU1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h2 {
+  margin-bottom: 12px;
+  font-size: 2rem;
+}
+
+/* 본문 */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+main section + section {
+  margin-top: 48px;
+}
+
+main h2 {
+  margin-bottom: 20px;
+}
+
+.basis {
+  margin-bottom: 20px;
+}
+
+/* 카드 격자 */
+.board {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+/* 영화 카드 */
+.card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--surface);
+
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px var(--hover-shadow);
+}
+
+.poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.info {
+  padding: 16px;
+}
+
+.info h3 {
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+}
+
+.info p {
+  margin-top: 6px;
+}
+
+/* 평점 배지 */
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+/* 순위 배지 */
+.rank {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* 순위 변동 */
+.change.up,
+.change.new {
+  color: var(--warn);
+}
+
+.change.down {
+  color: var(--accent);
+}
+
+.change.up::before {
+  content: "▲";
+}
+
+.change.down::before {
+  content: "▼";
+}
+
+.change.new::before {
+  content: "NEW";
+}
+
+/* 대체 표지 */
+.card.no-poster .poster-fallback {
+  aspect-ratio: 2 / 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 5rem;
+  font-family: var(--font-title);
+
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--surface)
+  );
+}
+
+/* 기존 상세 페이지 스타일 */
+.detail-page {
+  min-height: 100vh;
+
+  background-image:
+    linear-gradient(
+      var(--detail-overlay),
+      var(--detail-overlay)
+    ),
+    url("https://image.tmdb.org/t/p/w1280/1AzcUrslZJYlLd1jvLy6mswihU1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+  align-items: start;
+  margin-top: 20px;
+}
+
+.detail img {
+  width: 100%;
+}
+
+.detail dl {
+  min-width: 0;
+  margin: 0;
+}
+
+.detail dt {
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.detail dd {
+  margin: 0 0 20px;
+}
+
+/* 푸터 */
+footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  font-size: 0.85rem;
+}
+
+footer p + p {
+  margin-top: 10px;
+}
+
+/* 600px 이상: 카드 2열, 상세 2단 */
+@media (min-width: 600px) {
+  nav ul {
+    flex-direction: row;
+    gap: var(--gap);
+  }
+
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detail {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* 1024px 이상: 카드 4열 */
+@media (min-width: 1024px) {
+  .board {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .hero {
+    min-height: 60vh;
+  }
+}
+
+/* 12주차에서 가져온 규칙 */
+.card.hot .badge {
+  background: var(--warn);
+  color: var(--text);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.toolbar input[type="search"],
+.toolbar select {
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.like {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  color: #bbb;
+  cursor: pointer;
+}
+
+.like.liked {
+  color: crimson;
+}
+
+.state-empty {
+  display: none;
+  color: #fff;
+}
+
+.board.is-empty + .state-empty {
+  display: block;
+}
